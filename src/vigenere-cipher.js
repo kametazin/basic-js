@@ -24,6 +24,7 @@ class VigenereCipheringMachine {
     this.isDirect = isDirect;
     this.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   }
+
   encrypt(message, key) {
     if (!message || !key) {
       throw new Error('Incorrect arguments!');
@@ -48,8 +49,10 @@ class VigenereCipheringMachine {
         result += messageChar;
       }
     }
-    return result;
+
+    return this.isDirect ? result : result.split('').reverse().join('');
   }
+
   decrypt(encryptedMessage, key) {
     if (!encryptedMessage || !key) {
       throw new Error('Incorrect arguments!');
@@ -74,8 +77,10 @@ class VigenereCipheringMachine {
         result += encryptedChar;
       }
     }
-    return result;
+
+    return this.isDirect ? result : result.split('').reverse().join('');
   }
+
   generateKey(message, key) {
     let generatedKey = '';
     for (let i = 0, j = 0; i < message.length; i += 1) {
